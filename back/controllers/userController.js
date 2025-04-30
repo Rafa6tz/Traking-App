@@ -6,11 +6,11 @@ const SECRET = '1234'
 
 exports.registerUser = async (req, res) => {
     try {
-        const { document_type, document_number, name, street_address, city, state, email, password } = req.body
+        const { name, document_type, document_number, street_adress, city, state, email, password } = req.body
         const password_hash = await bcrypt.hash(password, 10)
         const result = await database.pool.query({
-            text: `INSERT INTO users(document_type, document_number, name, street_address, city, state, email, password_hash) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
-            values: [document_type, document_number, name, street_address, city, state, email, password_hash ]
+            text: `INSERT INTO users(name, document_type, document_number, street_adress, city, state, email, password_hash) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+            values: [name, document_type, document_number, street_adress, city, state, email, password_hash ]
         })
         return res.status(200).json(result.rows[0])
     } catch (error) {
