@@ -22,48 +22,52 @@ const Register = () => {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <div className='w-full h-full flex flex-col justify-center items-center bg-app-white font-roboto py-24'>
+    <form onSubmit={handleSubmit} className='bg-app-lgreen w-3/6 p-8 rounded-2xl h-190 flex flex-col gap-5 text-app-brown text-medium'>
+      <div className="flex flex-col">
         <label htmlFor='name'>Nome: </label>
-        <input type='text' id='name' name='name' required onChange={handleChange}/>
+        <input type='text' id='name' name='name' required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange}/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='document_type'>Documento: </label>
-        <div>
-        <input required onChange={handleChange} type='radio' id='document_type' name='document_type' value="CPF"/>
+        <div className="flex gap-2">
+        <input required className='accent-app-brown' onChange={handleChange} type='radio' id='document_type' name='document_type' value="CPF"/>
         <label htmlFor='CPF'>CPF</label>
         </div>
-        <div>
-        <input required onChange={handleChange} type='radio' id='document_type' name='document_type' value="CNPJ"/>
+        <div className="flex gap-2">
+        <input required className='accent-app-brown' onChange={handleChange} type='radio' id='document_type' name='document_type' value="CNPJ"/>
         <label htmlFor='CNPJ'>CNPJ</label>
         </div>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='document_number'>Número do documento: </label>
-        <input required onChange={handleChange} type='text' id='document_number' name='document_number'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='document_number' name='document_number'/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='street_adress'>Rua e número: </label>
-        <input required onChange={handleChange} type='text' id='street_adress' name='street_adress'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='street_adress' name='street_adress'/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='city'>Cidade: </label>
-        <input required onChange={handleChange} type='text' id='city' name='city'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='city' name='city'/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='state'>Estado: </label>
-        <input required onChange={handleChange} type='text' id='state' name='state'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='state' name='state'/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='email'>E-mail: </label>
-        <input required onChange={handleChange} type='text' id='email' name='email'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='email' name='email'/>
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor='password'>Senha: </label>
-        <input required onChange={handleChange} type='password' id='password' name='password'/>
+        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='password' id='password' name='password'/>
       </div>
-      <input type='submit' value="Cadastrar"/>
+      <div className='flex justify-center'>
+      <input type='submit' value="Cadastrar" className='bg-app-brown hover:bg-app-lbrown text-app-white hover:text-app-brown  w-36 h-8 rounded-xl cursor-pointer'/>
+      </div>
     </form>
+    </div>
   )
 }
 
