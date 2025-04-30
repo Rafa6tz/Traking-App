@@ -1,4 +1,5 @@
 import {NavLink, useNavigate} from 'react-router-dom'
+import { FaTractor, FaUserTie, FaBarcode, FaCarrot } from "react-icons/fa";
 
 const Nav = () => {
     const navigate = useNavigate();
@@ -13,7 +14,13 @@ const Nav = () => {
     <nav className='flex justify-between fixed w-full bg-app-green text-app-brown h-12 items-center font-roboto'>
         <a className='text-2xl p-8 font-bold' href='/'>TRAKING</a>
         {token ? (
-            <div className='px-12'>
+            <div className='px-12 flex w-full justify-between'>
+                <div className='flex justify-between p-8 w-5/6'>
+                    <NavLink to="/traking" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaCarrot/>Rastreamento</NavLink>
+                    <NavLink to="/suppliers" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaTractor/>Fornecedores</NavLink>
+                    <NavLink to="/clients" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaUserTie/>Clientes</NavLink>
+                    <NavLink to="/barcodes" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaBarcode/>Código de Barras</NavLink>
+                </div>
                 <button onClick={handleLogout} className='cursor-pointer hover:text-app-lbrown'>Sair</button>
             </div>
         ) : (

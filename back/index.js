@@ -7,6 +7,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(require('./routes/userRoute'))
+app.use(require('./routes/clientRoute'))
 
 
 app.listen(3000, () => console.log('Server is running'))
