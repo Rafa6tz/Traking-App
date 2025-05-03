@@ -47,3 +47,54 @@ exports.getClients = async (req, res) => {
     return res.status(500).json({error: error.message})
   }
 }
+
+exports.updateClient = async (req, res) => {
+  const userId = req.user.id;
+  const {
+    document_type,
+    document_number,
+    name,
+    street_address,
+    city,
+    state
+  } = req.body;
+
+  try {
+    const result = await database.pool.query({
+      text: `UPDATE clients SET
+        document_type = $1,
+        document_number = $2,
+        name = $3,
+        street_address = $4,
+        city = $5,
+        state = $6,
+        updated_at = NOW()
+      WHERE id = $7 AND user_id = $8
+      RETURNING *`,
+      values: [document_type,
+        document_number,
+        name,
+        street_address,
+        city,
+        state, req.params.id, userId]
+    })
+    return res.status(201).json(result.rows[0])
+  } catch (error) {
+    return res.status(500).json({error: error.message})
+  }
+}
+
+exports.deleteClient = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const result = await database.pool.query({
+      text: `
+      DELETE FROM clients WHERE id = $1 AND user_id = $2`,
+      values: [req.params.id, userId]
+    })
+    return res.status(204).send()
+  } catch (error) {
+    return res.status(500).json({error: error.message})
+  }
+}
