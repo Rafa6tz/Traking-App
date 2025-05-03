@@ -1,13 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ITaskClient } from '../interfaces/TaskClient'
+import {FaUserEdit, FaTrashAlt} from 'react-icons/fa'
 
 type Props = {
   handleDelete(id: string): void,
-  clientsList: ITaskClient[]
+  clientsList: ITaskClient[],
+  handleEdit(client: ITaskClient): void,
 }
 
-const ClientsList = ({handleDelete, clientsList}: Props) => {
+const ClientsList = ({handleDelete, clientsList, handleEdit}: Props) => {
 
     
 
@@ -17,9 +19,18 @@ const ClientsList = ({handleDelete, clientsList}: Props) => {
         
         (clientsList.map(client => (
           <div key={client.id} className='bg-app-lgreen p-4 rounded-xl w-2/5 m-4 font-roboto text-lg'>
-            <p>Nome: {client.name}</p>
-            <p>{client.document_type}: {client.document_number}</p>
-            <button onClick={() => handleDelete(client.id)}>Deletar</button>
+            <div className='flex gap-2 p-2'>
+            <p>Nome: </p>
+            <p className='text-xl font-semibold'>{client.name}</p>
+            </div>
+            <div className='flex gap-2 p-2'>
+            <p>{client.document_type}:</p>
+            <p className='text-xl font-semibold'>{client.document_number}</p>
+            </div>
+            <div className='flex justify-around mt-2'>
+            <button onClick={() => handleDelete(client.id)} className='flex gap-2 justify-center items-center w-28 rounded-2xl bg-red-800 text-xl text-app-lbrown'><FaTrashAlt/>Deletar</button>
+            <button onClick={() => handleEdit(client)} className='flex gap-2 justify-center items-center w-28 rounded-2xl bg-amber-500 text-xl text-app-lbrown'><FaUserEdit/>Editar</button>
+            </div>
           </div>
         )))
     ) : (

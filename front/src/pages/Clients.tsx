@@ -48,6 +48,29 @@ const Clients = () => {
 
   // ---------------------------------------------------------------
   //UPDATE
+  const editClients = (client: ITaskClient) => {
+    setClientsToUpdate(client)
+  }
+
+  const updateClient = async (client: ITaskClient) => {
+    try {
+      await axios.put(`http://localhost:3000/clients/${client.id}`, client, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+  
+      const updatedItems = clientsList.map(c =>
+        c.id === client.id ? client : c
+      );
+      setClientsList(updatedItems); 
+      setClientsToUpdate(null);
+      toggleModal();
+    } catch (error) {
+      console.error("Erro ao atualizar client:", error);
+    }
+  }
+  
 
   return (
     <div className='font-roboto text-app-brown bg-app-white h-screen w-full py-24 flex flex-col items-center'>
@@ -56,14 +79,18 @@ const Clients = () => {
             <div className="absolute inset-0 bg-gray-800 opacity-70 z-10" onClick={toggleModal}>
             </div>
            <div className="z-10 flex flex-col items-center w-3/6 h-9/10">
-           <ClientsForm btnText='Cadastrar' setClientsList={setClientsList} clientsList={clientsList} closeModal={toggleModal}/>
+          {clientsToUpdate ? (<ClientsForm btnText='Editar' handleUpdate={updateClient} clientsList={clientsList} client={clientsToUpdate} />) : (<ClientsForm btnText='Cadastrar' setClientsList={setClientsList} clientsList={clientsList} closeModal={toggleModal}/>)} 
             <p className="rounded-full bg-gray-200 text-xl w-8 h-8 text-center m-2 cursor-pointer hover:bg-red-300" onClick={toggleModal}>x</p>
           </div>
         </div>
       )}
       <h3 className='text-2xl'>Cadastro de Clientes</h3>
-      <button onClick={toggleModal} className='flex cursor-pointer hover:bg-app-green hover:text-app-lgreen justify-center items-center gap-2 bg-app-brown text-app-lbrown w-56 h-6 rounded-xl m-12'><FaPlusCircle/>Adicionar Novo Cliente</button>
-      <ClientsList handleDelete={deleteClient} clientsList={clientsList}/>
+      <button onClick={() => {
+  setClientsToUpdate(null);
+  toggleModal();
+}}  className='flex cursor-pointer hover:bg-app-green hover:text-app-lgreen justify-center items-center gap-2 bg-app-brown text-app-lbrown w-56 h-6 rounded-xl m-12'><FaPlusCircle/>Adicionar Novo Cliente</button>
+      <ClientsList handleDelete={deleteClient} clientsList={clientsList} handleEdit={(client) => {editClients(client); toggleModal()}}/>
+      
     </div>
   )
 }
