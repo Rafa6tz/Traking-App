@@ -11,7 +11,7 @@ const Nav = () => {
       };
 
   return (
-    <nav className='flex justify-between fixed w-full bg-app-green text-app-brown h-12 items-center font-roboto'>
+    <nav className='flex justify-between fixed w-full p-2 bg-app-green text-app-brown h-12 items-center font-roboto shadow-xl rounded-b-2xl'>
         <a className='text-2xl p-8 font-bold' href='/'>TRAKING</a>
         {token ? (
             <div className='px-12 flex w-full justify-between'>

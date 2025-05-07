@@ -14,8 +14,10 @@ type Props = {
 const ClientsForm = ({btnText ,setClientsList, clientsList, closeModal, client, handleUpdate}: Props) => {
     const [form, setForm] = useState({name: '', document_type: '', document_number: '', street_address: '', city: '', state: ''})
     const token = localStorage.getItem('token');
+    const [estados, setEstados] = useState<{ sigla: string; nome: string }[]>([])
+    const [cidades, setCidades] = useState<{ nome: string }[]>([])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       setForm({...form, [e.target.name]: e.target.value})
     }
 
@@ -43,6 +45,21 @@ const ClientsForm = ({btnText ,setClientsList, clientsList, closeModal, client, 
       }
     }, [client])
 
+    // Fetch na API do IBGE
+    useEffect(() => {
+      axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+      .then(res => setEstados(res.data))
+    }, [])
+
+    useEffect(() =>{
+      if(form.state) {
+        axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${form.state}/municipios`)
+        .then(res => setCidades(res.data))
+      } else {
+        setCidades([])
+      }
+    }, [form.state])
+
   return (
     <form onSubmit={handleSubmit} className='bg-app-lgreen w-full p-6 rounded-2xl h-180 flex flex-col gap-4 text-app-brown text-medium'>
       <div className="flex flex-col">
@@ -69,12 +86,34 @@ const ClientsForm = ({btnText ,setClientsList, clientsList, closeModal, client, 
         <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='street_address' name='street_address' value={form.street_address}/>
       </div>
       <div className="flex flex-col">
-        <label htmlFor='city'>Cidade: </label>
-        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='city' name='city' value={form.city}/>
+        <label htmlFor='state'>Estado: </label>
+        <select name='state'
+    value={form.state}
+    onChange={handleChange}
+    required
+    className='w-full p-2 rounded-lg bg-app-white'>
+        <option value=''>Selecione um estado</option>
+          {estados.map((estados) => (
+            <option key={estados.sigla} value={estados.sigla}>
+              {estados.nome}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="flex flex-col">
-        <label htmlFor='state'>Estado: </label>
-        <input required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange} type='text' id='state' name='state' value={form.state}/>
+        <label htmlFor='city'>Cidade: </label>
+        <select name='city'
+    value={form.city}
+    onChange={handleChange}
+    required
+    className='w-full p-2 rounded-lg bg-app-white'>
+          <option value=''>Selecione uma cidade</option>
+        {cidades.map((cidades) => (
+            <option key={cidades.nome} value={cidades.nome}>
+              {cidades.nome}
+            </option>
+          ))}
+        </select>
       </div>
       <div className='flex justify-center'>
       <input type='submit' value={btnText} className='bg-app-brown hover:bg-app-lbrown text-app-white hover:text-app-brown  w-36 h-8 rounded-xl cursor-pointer'/>

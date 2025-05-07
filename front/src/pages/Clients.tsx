@@ -73,7 +73,7 @@ const Clients = () => {
   
 
   return (
-    <div className='font-roboto text-app-brown bg-app-white h-screen w-full py-24 flex flex-col items-center'>
+    <div className='font-roboto text-app-brown bg-app-white h-full w-full py-24 flex flex-col items-center'>
       {addClientModal && (
         <div className="w-full h-full fixed inset-0 flex items-center justify-center">
             <div className="absolute inset-0 bg-gray-800 opacity-70 z-10" onClick={toggleModal}>
