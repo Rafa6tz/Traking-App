@@ -11,15 +11,15 @@ const Nav = () => {
       };
 
   return (
-    <nav className='flex justify-between fixed w-full p-2 bg-app-green text-app-brown h-12 items-center font-roboto shadow-xl rounded-b-2xl'>
+    <nav className='flex justify-between fixed w-screen p-2 bg-app-green text-app-brown h-12 items-center font-roboto shadow-xl rounded-b-2xl'>
         <a className='text-2xl p-8 font-bold' href='/'>TRAKING</a>
         {token ? (
             <div className='px-12 flex w-full justify-between'>
                 <div className='flex justify-between p-8 w-5/6'>
-                    <NavLink to="/traking" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaCarrot/>Rastreamento</NavLink>
-                    <NavLink to="/suppliers" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaTractor/>Fornecedores</NavLink>
-                    <NavLink to="/clients" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaUserTie/>Clientes</NavLink>
-                    <NavLink to="/barcodes" className={({isActive}) => isActive ? "flex gap-2 text-app-lbrown" : "flex gap-2 hover:font-bold"}><FaBarcode/>Código de Barras</NavLink>
+                    <NavLink to="/traking" className={({isActive}) => isActive ? "flex gap-2 items-center text-app-lbrown" : "flex items-center gap-2 hover:font-bold"}><FaCarrot/>Rastreamento</NavLink>
+                    <NavLink to="/suppliers" className={({isActive}) => isActive ? "flex gap-2 items-center text-app-lbrown" : "flex gap-2 items-center hover:font-bold"}><FaTractor/>Fornecedores</NavLink>
+                    <NavLink to="/clients" className={({isActive}) => isActive ? "flex gap-2 items-center text-app-lbrown" : "flex gap-2 items-center hover:font-bold"}><FaUserTie/>Clientes</NavLink>
+                    <NavLink to="/barcodes" className={({isActive}) => isActive ? "flex gap-2 items-center text-app-lbrown" : "flex gap-2 items-center hover:font-bold"}><FaBarcode/>Código de Barras</NavLink>
                 </div>
                 <button onClick={handleLogout} className='cursor-pointer hover:text-app-lbrown'>Sair</button>
             </div>

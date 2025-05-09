@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-    --color-app-green: #CCD5AE;
-    --color-app-lgreen: #E9EDC9;
-    --color-app-white: #FEFAE0;
+    --color-app-green: #3a5a40;
+    --color-app-lgreen: #588157;
+    --color-app-white: #fefae0;
     --color-app-lbrown: #FAEDCD;
     --color-app-brown: #D4A373;
     --font-roboto: "Roboto", sans-serif; 

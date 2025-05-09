@@ -74,7 +74,7 @@ const Suppliers = () => {
   
 
   return (
-    <div className='font-roboto text-app-brown bg-app-white h-screen w-full py-24 flex flex-col items-center'>
+    <div className='font-roboto text-app-brown bg-app-white min-h-screen w-full py-24 flex flex-col items-center'>
       {addSupplierModal && (
         <div className="w-full h-full fixed inset-0 flex items-center justify-center">
             <div className="absolute inset-0 bg-gray-800 opacity-70 z-10" onClick={toggleModal}>
@@ -89,7 +89,7 @@ const Suppliers = () => {
       <button onClick={() => {
   setSuppliersToUpdate(null);
   toggleModal();
-}}  className='flex cursor-pointer hover:bg-app-green hover:text-app-lgreen justify-center items-center gap-2 bg-app-brown text-app-lbrown w-56 h-6 rounded-xl m-12'><FaPlusCircle/>Adicionar Novo Fornecedor</button>
+}}  className='flex cursor-pointer hover:bg-app-green hover:text-app-white justify-center items-center gap-2 bg-app-brown text-app-lbrown w-64 h-6 rounded-xl m-12'><FaPlusCircle/>Adicionar Novo Fornecedor</button>
       <SuppliersList handleDelete={deleteSupplier} suppliersList={suppliersList} handleEdit={(supplier) => {editSuppliers(supplier); toggleModal()}}/>
       
     </div>

@@ -23,7 +23,7 @@ const Register = () => {
 
   return (
     <div className='w-full h-full flex flex-col justify-center items-center bg-app-white font-roboto py-24'>
-    <form onSubmit={handleSubmit} className='bg-app-lgreen w-3/6 p-8 rounded-2xl h-190 flex flex-col gap-5 text-app-brown text-medium'>
+    <form onSubmit={handleSubmit} className='bg-app-lgreen md:w-3/6 w-4/5 p-8 rounded-2xl h-190 flex flex-col gap-5 text-app-brown text-medium'>
       <div className="flex flex-col">
         <label htmlFor='name'>Nome: </label>
         <input type='text' id='name' name='name' required className='w-full p-2 rounded-lg bg-app-white' onChange={handleChange}/>

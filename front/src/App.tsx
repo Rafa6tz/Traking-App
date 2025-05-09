@@ -4,14 +4,33 @@ import HomeOut from './pages/HomeOut';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Nav from './components/Nav';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Clients from './pages/Clients';
 import Traking from './pages/Traking';
 import Supplier from './pages/Supplier';
 import BarCodes from './pages/BarCodes';
 
 function App() {
+
+  const isTokenValid = (token: string): boolean => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
+  };
+  
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  
+  useEffect(() => {
+    if (!token || !isTokenValid(token)) {
+      localStorage.removeItem('token');
+      setToken(null);
+      alert('Sessão expirada, faça o Login novamente!');
+    }
+  }, [token]);
+  
 
   return (
     <>

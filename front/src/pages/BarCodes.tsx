@@ -41,7 +41,7 @@ const BarCodes = () => {
   }
 
   return (
-    <div className='font-roboto text-app-brown bg-app-white h-full w-full py-24 flex flex-col items-center'>
+    <div className='font-roboto text-app-brown bg-app-white min-h-screen w-full py-24 flex flex-col items-center'>
     <BarCodesForm btnText='Adicionar' codeList={codeList} setCodeList={setCodeList}/>
     <BarCodesList codeList={codeList} handleDelete={deleteBarCode}/>
     </div>
